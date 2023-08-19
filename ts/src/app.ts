@@ -9,7 +9,8 @@ const utf8Decoder = new TextDecoder()
 const utf8Encoder = new TextEncoder()
 
 export const getSharedSecret = (privkey: string, pubkey: string): Uint8Array =>
-  sha256(secp256k1.getSharedSecret(privkey, '02' + pubkey).subarray(1, 33))
+  sha256(secp256k1.getSharedSecret(privkey, '02' + pubkey))
+  // sha256(secp256k1.getSharedSecret(privkey, '02' + pubkey).subarray(1, 33))
 
 export function encrypt(key: Uint8Array, text: string, v = 1) {
   if (v !== 1) {
@@ -66,17 +67,17 @@ function bytesToHex(bytes) {
     return hex.join("");
 }
 
-const encrypted = "Ac4wiXzHQ20IrriCl8ZNzPWEGre97jKP6THD4ACR"
-const alice_priv = "5c0c523f52a5b6fad39ed2403092df8cebc36318b39383bca6c00808626fab3a"
-const bob_priv = "4b22aa260e4acb7021e32f38a6cdf4b673c6a277755bfce287e370c924dc936d"
+const encrypted = "ARIfnWByZ3dkL9gihnkatNdGHJUC68u25qM="
+const alice_priv = "0000000000000000000000000000000000000000000000000000000000000001";
+const bob_priv = "0000000000000000000000000000000000000000000000000000000000000002";
 const alice_pub = bytesToHex(secp256k1.getPublicKey(alice_priv)).substr(2, 64);
 console.log("ALICE PUB = " + alice_pub);
 const bob_pub = bytesToHex(secp256k1.getPublicKey(bob_priv)).substr(2, 64);
 console.log("BOB PUB = " + bob_pub);
 let key = getSharedSecret(alice_priv, bob_pub);
-console.log("SHARED = " + key);
+console.log("SHARED = " + bytesToHex(key));
 let key2 = getSharedSecret(bob_priv, alice_pub);
-console.log("SHARED = " + key2);
+console.log("SHARED = " + bytesToHex(key2));
 let decrypted = decrypt(key, encrypted);
 console.log("DECRYPTED: " + decrypted);
 console.log("DECRYPTED HEX: " + bytesToHex(decrypted));
