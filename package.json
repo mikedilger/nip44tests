@@ -1,0 +1,21 @@
+{
+  "name": "nip44",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Michael Dilger <mike@mikedilger.com> (https://mikedilger.com/)",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@noble/ciphers": "^0.2.0",
+    "@noble/curves": "^1.1.0",
+    "@noble/hashes": "^1.3.1",
+    "@scure/base": "^1.1.1"
+  }
+}
